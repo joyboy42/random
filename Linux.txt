@@ -1,0 +1,356 @@
+install/remove applications:
+sudo apt-get install <program-name>
+sudo apt-get remove <program-name>
+
+search the repository :
+apt-cache search bluefish*
+
+to see if something is installed:
+apt-cache policy gimp
+
+to install packages not in the repository:
+sudo dpkg -i <file-path>
+
+to keep things updated:
+sudo apt-get upgrade
+
+to add repository:
+sudo add-apt-repository <repo-name> && sudo apt-get update
+
+.deb files are used in ubuntu
+
+-------------------------------------------------------------
+ls -l
+use a long listing format
+
+ls -d ?l
+list directories themselves, not their contents
+
+ls -r
+reverse order while sorting
+
+ls -S
+sort by file size, largest first
+
+ls -t
+sort by modification time, newest first
+
+man ls
+
+ls --help
+
+-------------------------------------------------------------
+
+cd
+
+pwd
+
+-------------------------------------------------------------
+
+sudo !!
+
+./
+
+~/
+
+../../
+
+sudo su / su root { superuser-do switch-user }
+su home
+
+-------------------------------------------------------------
+
+sudo nano file.txt
+^O - save
+^X - exit
+
+to change ownership:
+sudo chown root:home file.txt
+	   (user:group)
+
+to change ownership of all files within a directory:
+sudo chown -R home:home ./dir
+
+to change permission:
+sudo chmod 664 file.txt { _ ___ ___ ___ }
+
+rm file.txt
+
+-------------------------------------------------------------
+
+create files:
+touch a.txt b.c c.cpp d.cpp e.cpp
+
+to delete all cpp files:
+rm *.cpp
+
+delete the contents, but keep the directory:
+rm dir/*
+
+to remove directory:
+rm -rf dir
+
+cp <file> <path/new-filename>
+
+mv <file> <path/new-filename>
+
+mkdir
+
+-------------------------------------------------------------
+
+search -
+
+case sensitive:
+find . -type f -name "*.php"
+	(f-files, d-directory)
+
+case insensitive:
+find . -type f -iname "*.php"
+
+permissions:
+find . -type f -perm 0664
+
+size:
+find . -size +100k
+	      100k
+	     -1M
+
+to search for files that are not php:
+find . -type f -not -iname "*.php"
+
+searches for conf files upto only one level down:
+find . -maxdepth 1 -type f -iname "*.conf"
+
+-------------------------------------------------------------
+
+grep "<key-word>" <file-name> <file2-name>
+
+ignore the case, search all files in the current directory:
+grep -i "function" ./*	      
+
+gives you line number of occurence within the file:
+grep -n "funny" ./*
+
+1st find php files, then execute grep:
+find . -type f -iname "*.php" -exec grep -i -n "funtion" {} +
+
+redirect the output:
+ls > outfile.txt
+
+pipe the output (displays and also saves):
+find . -type f -size -10k -iname "*.php" -exec grep -i -n "function" {} + | tee op.txt
+
+-------------------------------------------------------------
+
+to see the running processes (top of the list, real-time):
+top 
+
+to see the entire list at a particular instant:
+ps aux
+
+to search for a process:
+ps aux | grep liri-browser
+
+to get the process id (order is chronological) :
+pgrep liri-browser
+
+to end a process by process id:
+kill -9 <pid>
+
+to end all instances of a process:
+killall liri-browser
+
+-------------------------------------------------------------
+
+services -
+
+to start a service:
+sudo service <service-name> start
+
+to stop a service:
+sudo service <service-name> stop
+
+to restart the service:
+sudo service <service-name> restart
+
+or
+
+to start a service:
+sudo systemctl start <service-name>
+
+to stop a service:
+sudo systemctl stop <service-name>
+
+-------------------------------------------------------------
+
+scheduling tasks -
+
+building crontab:
+crontab -e
+
+# m		   h  		    dom 		     mon 	       dow    		     command
+minute (0 to 59) - hour (0 to 23) - day of month (1 to 31) - month (1 to 12) - day of week (0 to 6)
+
+0 - sunday
+
+00 05 * * 0 ls > /home/home/dir/cronres.txt
+
+making a backup:
+0 5 * * 1 tar -zcf /var/backups/home.tgz /home/
+
+for tasks requiring previleges:
+sudo crontab -e
+
+and then scheduling automatic updates:
+0 9 * * 1 apt-get upgrade -y
+
+-------------------------------------------------------------
+
+sudo apt-get install openjdk-8-jre
+
+ide
+codeblocks, eclipse, qt 5, jet brains
+
+./eclipse-inst
+
+sh ./pycharm.sh
+
+-------------------------------------------------------------
+
+git init
+
+git remote add origin https://github.com/dwiseguy/linux.git
+
+configure user account:
+git config --global user.name "joyboy"
+git config --global user.email asifsa175@gmail.com
+
+pull:
+git pull origin master
+
+git branch --set-upstream-to=origin/master
+
+upload changes:
+git add README.md
+
+git add -A
+
+git commit -m "yey"
+
+git push
+git push origin master
+(git push origin <branch-name>)
+
+git rm -r .
+
+git fetch origin master
+
+git merge
+
+git branch <name>
+
+git checkout master
+
+git merge <branch-name> master
+
+-------------------------------------------------------------
+
+meteor - skipped
+
+-------------------------------------------------------------
+??
+
+sudo apt-get install apache2 php5 mysql-server php5-common
+
+sudo systemctl start apache2
+(goto localhost on browser)
+
+apa/var/www/ - where apache serves the files by default
+
+sudo chown -R home:home <path>
+
+/etc/apache2 - contains configuration files
+
+change run user and group in envvars into 'home'
+
+sudo systemctl restart apache2
+
+3:49 to 5:46 - skipped
+
+-------------------------------------------------------------
+
+to extract:
+tar -xvf file.tar.gz
+
+-------------------------------------------------------------
+
+pip - python package manager
+
+sudo apt-get install python-pip
+(python3-pip3)
+
+python
+*to get into CLI - command line interface (real time)
+
+ctrl+z - exit
+
+sudo pip install web.py
+
+
+
+
+-------------------------------------------------------------
+
+sudo adduser user-name
+
+su user-name
+
+*to add users to sudoers list
+sudo adduser user-name sudo
+
+sudo deluser user-name
+
+sudo passwd user-name
+
+sudo groupadd group-name
+
+sudo adduser user-name group-name
+
+-------------------------------------------------------------
+
+ping www.google.com
+
+ifconfig
+
+sudo tcpdump 
+sudo tcpdump -c 10 (captures 10 packets)
+
+sudo tcpdump -c 5 -A
+sudo tcpdump 
+
+sudo tcpdump -c 5 -i eno1
+
+sudo tcpdump -XX -i eno1
+
+sudo tcpdump -i eno1 port 22 (ssh)
+
+netstat -nr
+
+netstat -i
+
+netstat -ta
+
+netstat -tan
+
+(network-tools.com)
+
+sudo nano /etc/hosts
+
+
+
+
+
+
+
+
+
